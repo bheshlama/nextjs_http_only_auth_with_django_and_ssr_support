@@ -49,16 +49,12 @@ frontend/  # Next.js (React) frontend
    ```bash
    cd frontend
    ```
-2. Install dependencies:
+2. Install dependencies (use yarn):
    ```bash
-   npm install
-   # or
    yarn install
    ```
 3. Start the development server:
    ```bash
-   npm run dev
-   # or
    yarn dev
    ```
 
