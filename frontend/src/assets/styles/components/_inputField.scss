@@ -1,0 +1,35 @@
+.app-input-field {
+  &.variant-sm {
+    .app-input-container {
+      padding-block: 10px !important;
+    }
+  }
+
+  .app-input {
+    @extend .hl-body-2;
+  }
+
+  &.app-input-disabled {
+    .app-input-container {
+      @apply bg-gimGrey-light text-gimGrey-dark;
+      cursor: not-allowed;
+      input {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &.app-input-invalid {
+    .app-input-container {
+      @apply border-gimError;
+    }
+  }
+
+  .hint {
+    @extend .hl-body-2;
+
+    &.info-error {
+      @apply text-gimError;
+    }
+  }
+}

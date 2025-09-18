@@ -1,0 +1,37 @@
+// Screen Breakpoints
+$breakpoint-mobile-extra-small: 340px;
+$breakpoint-mobile-small: 375px; //sm
+$breakpoint-mobile-medium: 420px;
+$breakpoint-small: 768px; //md
+$breakpoint-medium: 1440px; //lg
+$breakpoint-large: 1520px;
+
+// Colors
+$primary-black: #000000;
+$primary-lite-black: #2a2a29;
+$primary-dim-black: #151515;
+// $primary-feather: #fffbda;
+$primary-brown: #a67c00;
+$primary-lite-brown: #eaaf00;
+$primary-dim-gold: #bf9b30;
+$primary-gold: #ffbf00;
+$primary-yellow: #ffcf40;
+$primary-lite-yellow: #ffdc73;
+
+
+$gimYellow-light: #ffdc73;
+$gimBrown-light: #eaaf00;
+
+
+$primary-feather: #fffbda;
+
+// $primary-brown: #b39576;
+$primary-grey: #b3b3b3;
+$primary-error: #da2020;
+$black-1010: #101010;
+
+// Z-index Control
+$z-index-first: 99999; // used in sidebar-control
+$z-index-second: 99998; // used in app-drawer
+$z-index-third: 99997;
+

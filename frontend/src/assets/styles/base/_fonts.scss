@@ -1,0 +1,275 @@
+@import "./variables";
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("../../fonts/helveticaneue/HelveticaNeueBold.ttf");
+  font-weight: 700;
+  font-display: swap; // understand how font-display and swap works
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("../../fonts/helveticaneue/HelveticaNeueBoldItalic.ttf");
+  font-weight: 700;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("../../fonts/helveticaneue/HelveticaNeueMedium.ttf");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("../../fonts/helveticaneue/HelveticaNeueLight.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("../../fonts/helveticaneue/HelveticaNeueLightItalic.ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+
+.hl-font {
+  font-family: "Inter", sans-serif;
+}
+
+// responsive fonts
+.hl-h1-bold {
+  @extend .hl-font;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: normal;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 16px;
+  }
+}
+
+.hl-h2-bold {
+  @extend .hl-font;
+
+  font-size: 12px;
+  font-weight: 700;
+  line-height: normal;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 14px;
+  }
+}
+
+.hl-h3-bold {
+  @extend .hl-font;
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: normal;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 12px;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 12px;
+  }
+}
+
+.hl-h4-bold {
+  @extend .hl-font;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: normal;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 10px;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 10px;
+  }
+}
+
+.hl-h1 {
+  @extend .hl-font;
+
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 16px;
+  }
+}
+
+.hl-h2 {
+  @extend .hl-font;
+
+  font-size: 10px;
+  font-weight: 500;
+  line-height: normal;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 14px;
+  }
+}
+
+.hl-h3 {
+  @extend .hl-font;
+
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 14px;
+  }
+}
+
+.hl-h4 {
+  @extend .hl-font;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 10px;
+    font-weight: 500;
+  }
+}
+
+.hl-body-bold {
+  @extend .hl-font;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 12px;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 12px;
+  }
+}
+
+.hl-body-1 {
+  @extend .hl-font;
+
+  font-size: 10px;
+  font-weight: 400;
+  line-height: normal;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 16px;
+  }
+}
+
+.hl-body-2 {
+  @extend .hl-font;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 200%;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 14px;
+    line-height: normal;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 14px;
+    line-height: normal;
+  }
+}
+
+.hl-body-3 {
+  @extend .hl-font;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 200%;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 12px;
+    line-height: normal;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 12px;
+    line-height: normal;
+  }
+}
+
+.hl-body-4 {
+  @extend .hl-font;
+
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 200%;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 10px;
+    line-height: normal;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 10px;
+    line-height: normal;
+  }
+}
+
+.hl-body-small {
+  @extend .hl-font;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 220%;
+
+  @media screen and (min-width: $breakpoint-small) {
+    font-size: 12px;
+    line-height: normal;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    font-size: 12px;
+    line-height: normal;
+  }
+}

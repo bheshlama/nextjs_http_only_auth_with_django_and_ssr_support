@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": "src",
+    "noImplicitAny": false,
+    "downlevelIteration": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "auth": ["src/auth"],
+      "styles": ["src/styles/"],
+      "components": ["src/views"],
+      "app": ["src/app/"],
+      "lib": ["src/lib/"],
+      "assets/": ["src/assets/"],
+      "shad": ["src/shad"],
+      "core": ["src/core/"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/views/pages/LandingPage",
+    "src/views/pages/Authentication/Registration/RegistrationContainer.tsx",
+    "next.config.js"
+  ],
+  "exclude": ["node_modules"]
+}
