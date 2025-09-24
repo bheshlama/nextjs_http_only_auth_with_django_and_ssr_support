@@ -4,6 +4,7 @@ import "assets/styles/main.scss";
 import { Inter } from "next/font/google";
 import ReactQueryProvider from "core/context/ReactQueryProvider/ReactQueryProvider";
 import StoreProvider from "core/hocs/StoreProvider";
+import { initializeStore } from "core/store/store";
 // import { SessionProvider } from "next-auth/react";
 // import { auth } from "../auth/auth";
 
@@ -31,6 +32,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   // const session = await auth();
+
+  const store = initializeStore();
+  const preloadedState = store.getState();
   return (
     // <SessionProvider session={session}>
     <html lang="en" className={inter.className}>
@@ -41,7 +45,9 @@ export default async function RootLayout({
       {/* <link rel="preload" as="font"></link> */}
       <body>
         <ReactQueryProvider>
-          <StoreProvider>{children}</StoreProvider>
+          <StoreProvider preloadedState={preloadedState}>
+            {children}
+          </StoreProvider>
         </ReactQueryProvider>
       </body>
     </html>
