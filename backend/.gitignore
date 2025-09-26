@@ -1,3 +1,49 @@
-# Python cache
+# Python cache files
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Django migrations (optional: include if you don't want to track them)
+# If you want to keep migrations in Git, comment these out
+*/migrations/__pycache__/
+*/migrations/*.pyc
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Django secret key / settings
+*.sqlite3
+*.log
+
+# VS Code / IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Mac OS files
+.DS_Store
+
+# Node / frontend stuff (if you have frontend code)
+node_modules/
+dist/
+build/
+
+# JetBrains
+*.iml
+
+# Python coverage and testing
+.coverage
+htmlcov/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Backup / temp files
+*.bak
+*.swp
+*~
