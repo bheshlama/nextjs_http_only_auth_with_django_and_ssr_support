@@ -4,6 +4,32 @@ import { IRegisterPayload, ILoginPayload } from "core/types/auth";
 import { frontendRoutes } from "core/routes/frontendRoutes";
 
 // Async thunks (same as your version, but with types)
+export const requestRefresh = createAsyncThunk(
+  "auth/requestRefresh",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get(frontendRoutes.api.auth.refresh, {
+        headers: {
+          Accept: "application/json",
+        },
+        // withCredentials: true, // if your refresh cookie is httpOnly
+      });
+
+      if (res.status === 200) {
+        // Dispatch checkAuthStatus to reload user info
+        await thunkAPI.dispatch(checkAuthStatus());
+        return { success: true };
+      } else {
+        return thunkAPI.rejectWithValue("Refresh failed");
+      }
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.error || "Refresh failed"
+      );
+    }
+  }
+);
+
 export const loadUser = createAsyncThunk(
   "auth/loadUser",
   async (_, thunkAPI) => {
@@ -48,30 +74,6 @@ export const checkAuthStatus = createAsyncThunk(
       }
     } catch {
       return thunkAPI.rejectWithValue(null);
-    }
-  }
-);
-
-export const requestRefresh = createAsyncThunk(
-  "auth/requestRefresh",
-  async (_, thunkAPI) => {
-    try {
-      const res = await axios.get(frontendRoutes.api.auth.refresh, {
-        headers: {
-          Accept: "application/json",
-        },
-        // withCredentials: true, // if your refresh cookie is httpOnly
-      });
-
-      if (res.status === 200) {
-        // Dispatch checkAuthStatus to reload user info
-        await thunkAPI.dispatch(checkAuthStatus());
-        return { success: true };
-      } else {
-        return thunkAPI.rejectWithValue("Refresh failed");
-      }
-    } catch (err: any) {
-      return thunkAPI.rejectWithValue(err.response?.data?.error || "Refresh failed");
     }
   }
 );
