@@ -1,13 +1,13 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { DeepPartial } from "lib/utils";
+import {
+  configureStore,
+  combineReducers,
+  ThunkAction,
+  Action,
+  UnknownAction,
+} from "@reduxjs/toolkit";
+
 // QUERIES
-// import { setupListeners } from "@reduxjs/toolkit/dist/query";
-// import { advDeclineChartQuery } from "core/queries/AdvDeclineChartQuery/advDeclineChart";
-// import { performanceTableFiltersQuery } from "core/queries/PerformanceTableQuery/performanceTableFilters";
 // import { supplierTableQuery } from "core/queries/SupplierTableQuery/supplierQuery";
-// import { materialCategoryQuery } from "core/queries/MaterialCategoryQuery/materialCategoryQuery";
-// import { productCategoryQuery } from "core/queries/ProductCategoryQuery/productCategoryQuery";
-// import { shopEssentialCategoryQuery } from "core/queries/ShopEssentialCategoryQuery/shopEssentialCategoryQuery";
 
 // SLICES
 import appRootReducer from "core/slices/appSlice";
@@ -19,62 +19,74 @@ import authRootReducer from "core/slices/authRootSlice";
 
 // Combine all reducers
 const rootReducers = combineReducers({
-  //   [supplierTableQuery.reducerPath]: supplierTableQuery.reducer,
-  //   [materialCategoryQuery.reducerPath]: materialCategoryQuery.reducer,
-  //   [productCategoryQuery.reducerPath]: productCategoryQuery.reducer,
-  //   [shopEssentialCategoryQuery.reducerPath]: shopEssentialCategoryQuery.reducer,
+  // [supplierTableQuery.reducerPath]: supplierTableQuery.reducer,
+  // [materialCategoryQuery.reducerPath]: materialCategoryQuery.reducer,
+  // [productCategoryQuery.reducerPath]: productCategoryQuery.reducer,
+  // [shopEssentialCategoryQuery.reducerPath]: shopEssentialCategoryQuery.reducer,
+
   appRoot: appRootReducer,
   authRoot: authRootReducer,
-  //   remainingRoot: remainingRootReducer,
-  //   materialRoot: materialReducer,
-  //   productRoot: productReducer,
-  //   shopEssentialRoot: shopEssentialsReducer,
+  // remainingRoot: remainingRootReducer,
+  // materialRoot: materialReducer,
+  // productRoot: productReducer,
+  // shopEssentialRoot: shopEssentialsReducer,
 });
 
-export type TRootState = {
-  [K in keyof typeof rootReducers]: ReturnType<(typeof rootReducers)[K]>;
-};
+// Infer the root state type from the combined reducers
+export type TRootState = ReturnType<typeof rootReducers>;
 
-// Combine all middleware
-const QueryMiddleware = [
+// Combine all middleware (using 'any[]' for the array type due to commented code)
+const QueryMiddleware: any[] = [
   // supplierTableQuery.middleware,
   // materialCategoryQuery.middleware,
   // productCategoryQuery.middleware,
   // shopEssentialCategoryQuery.middleware,
 ];
 
-export function initStore(preloadedState?: DeepPartial<TRootState>) {
+/**
+ * Factory function to create a new store instance. Used for both server and client initialization.
+ * @param preloadedState The initial state used for SSR hydration (Partial<TRootState> is required by RTK).
+ */
+export function initStore(preloadedState?: Partial<TRootState>) {
   return configureStore({
     reducer: rootReducers,
-    preloadedState, // ---------------------- NOTE: preloadedState refers to the initial state of the store
+    preloadedState, // Used for hydrating the state from the server
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(QueryMiddleware),
-    devTools: process.env.NODE_ENV !== "production",
+      // Type assertion necessary if QueryMiddleware contains RTK Query middleware
+      getDefaultMiddleware().concat(QueryMiddleware as any),
+    devTools: process.env.NODE_ENV !== "production", // Enable devtools only in development
   });
 }
 
+// Global store reference for the client-side singleton pattern
 let store: ReturnType<typeof initStore> | undefined;
 
-export function initializeStore(preloadedState?: DeepPartial<TRootState>) {
+/**
+ * Initializes the store. Creates a fresh store on the server, reuses a singleton on the client.
+ */
+export function initializeStore(preloadedState?: Partial<TRootState>) {
   if (typeof window === "undefined") {
-    // Server: fresh store for each request
+    // Server: Create a fresh store instance for every request to avoid state leakage
     return initStore(preloadedState);
   }
 
-  // Client: reuse store
+  // Client: Create the store only once (singleton)
   if (!store) {
     store = initStore(preloadedState);
-  } else if (preloadedState) {
-    // Merge preloaded state with existing client state
-    store = initStore({
-      ...store.getState(),
-      ...preloadedState,
-    });
   }
 
   return store;
 }
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<ReturnType<typeof initStore>["getState"]>;
-export type AppDispatch = ReturnType<ReturnType<typeof initStore>["dispatch"]>;
+type AppStore = ReturnType<typeof initStore>;
+
+export type RootState = TRootState; // RootState is the type of the entire store state (TRootState from above)
+export type AppDispatch = AppStore["dispatch"]; // AppDispatch is explicitly inferred from the store's dispatch function.
+
+// AppThunk type for use with createAsyncThunk actions
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string> | UnknownAction
+>;

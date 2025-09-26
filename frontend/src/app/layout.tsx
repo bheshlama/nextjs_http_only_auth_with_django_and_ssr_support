@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import ReactQueryProvider from "core/context/ReactQueryProvider/ReactQueryProvider";
 import StoreProvider from "core/hocs/StoreProvider";
 import { initializeStore } from "core/store/store";
+import { checkAuthStatus } from "core/actions/auth";
 // import { SessionProvider } from "next-auth/react";
 // import { auth } from "../auth/auth";
 
@@ -34,6 +35,7 @@ export default async function RootLayout({
   // const session = await auth();
 
   const store = initializeStore();
+  await store.dispatch(checkAuthStatus());
   const preloadedState = store.getState();
   return (
     // <SessionProvider session={session}>

@@ -5,7 +5,7 @@ import { useTypedDispatch, useTypedSelector } from "core/hooks";
 import { useRouter } from "next/navigation";
 import AppTopBarContainer from "views/containers/AppTopBarContainer/AppTopBarContainer";
 import { frontendRoutes } from "core/routes/frontendRoutes";
-import { requestRefresh } from "core/actions/auth";
+import { checkAuthStatus, requestRefresh } from "core/actions/auth";
 
 interface AppHocProps {
   children: ReactNode;
