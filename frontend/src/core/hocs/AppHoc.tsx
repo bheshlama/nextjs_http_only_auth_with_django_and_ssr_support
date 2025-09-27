@@ -24,8 +24,8 @@ const AppHoc = ({ children }: AppHocProps) => {
   useEffect(() => {
     if (!hasCheckedAuthRef.current && !user && !loading) {
       hasCheckedAuthRef.current = true;
-      // dispatch(checkAuthStatus());
-      dispatch(requestRefresh());
+      dispatch(checkAuthStatus());
+      // dispatch(requestRefresh());
     }
   }, [dispatch, user, loading]);
 

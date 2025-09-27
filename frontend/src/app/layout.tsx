@@ -35,7 +35,7 @@ export default async function RootLayout({
   // const session = await auth();
 
   const store = initializeStore();
-  await store.dispatch(checkAuthStatus());
+  // await store.dispatch(checkAuthStatus());
   const preloadedState = store.getState();
   return (
     // <SessionProvider session={session}>
